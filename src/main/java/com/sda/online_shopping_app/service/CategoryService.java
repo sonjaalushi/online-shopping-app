@@ -20,14 +20,15 @@ public class CategoryService {
         categoryRepo.delete(category);
     }
 
-
     public Optional<Category> findById(Integer id) {
         return Optional.of(categoryRepo.findById(id)).orElseThrow(()
                 -> new CategoryNotFoundException("Category not found with this :" + id));
     }
 
 
-    public Optional<Category> update(Category category,Integer id){
+
+
+    public Category update(Category category,Integer id){
 
         //kontrollohet nese ekziston objekti qe duam te bejme edit
         //nese nuk ekziston ne keto rreshta bejme throw nje error
@@ -37,13 +38,15 @@ public class CategoryService {
             }
             //nese ekziston e gjejme nga id ne databaze
             Optional<Category> categoryEntity = categoryRepo.findById(id);
+
             //pasi e gjejme i bejme update fushave perkatese
             categoryEntity.get().setName(category.getName());
 
             //pasi bejme get dhe set , bejme saveAndFlush objektin e ri te ndryshuar
-             categoryRepo.saveAndFlush(categoryEntity.get());
+
              //rikthejme serish objektin e ndryshuar ose mund te rikthejme void
-             return categoryEntity;
+             return categoryRepo.save(categoryEntity.get());
         }
+
 
 }

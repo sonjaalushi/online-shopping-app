@@ -14,10 +14,12 @@ import lombok.NoArgsConstructor;
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @jakarta.persistence.Column(name="product_id")
-    private Integer product_id;
+    @Column(name="product_id")
+    private Long product_id;
+
     @Column(name="name")
     private String name;
+
     @Column(name="price")
     private String description;
 
