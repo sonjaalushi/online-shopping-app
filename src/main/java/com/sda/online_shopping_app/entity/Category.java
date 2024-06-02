@@ -25,4 +25,6 @@ public class Category {
 
     @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "categoryEntity")
     private List<Products> products;
+
+    //test
 }
