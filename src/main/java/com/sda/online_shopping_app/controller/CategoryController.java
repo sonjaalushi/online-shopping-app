@@ -1,7 +1,6 @@
 package com.sda.online_shopping_app.controller;
 
 import com.sda.online_shopping_app.entity.Category;
-import com.sda.online_shopping_app.exceptions.CategoryNotFoundException;
 import com.sda.online_shopping_app.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
