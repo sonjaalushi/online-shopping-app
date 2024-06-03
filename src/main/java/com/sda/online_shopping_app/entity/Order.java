@@ -26,6 +26,6 @@ public class Order {
 
     private OrderLine orderLine;
 
-    @OneToMany(mappedBy = "order")
+    @ManyToOne
     private Client client;
 }

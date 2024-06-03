@@ -1,5 +1,7 @@
 package com.sda.online_shopping_app.entity;
 
+
+import java.util.List;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +21,8 @@ public class Client {
     private String name;
 
 
-    @ManyToOne()
-    private Order order;
+    @OneToMany(mappedBy = "client")
+    private List<Order> order;
 
 
 }
