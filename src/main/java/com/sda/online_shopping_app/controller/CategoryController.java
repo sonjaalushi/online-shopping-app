@@ -23,7 +23,7 @@ public class CategoryController {
     }
 
     @PutMapping("/updateCategory/{id}")
-    public ResponseEntity<Category> getCar(@RequestBody Category category, @PathVariable Integer id) {
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable Integer id) {
         Category categoryUpdate = categoryService.update(category, id);
 
         return new ResponseEntity<>(categoryUpdate, HttpStatus.OK);
