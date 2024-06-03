@@ -25,5 +25,7 @@ public class Order {
     private LocalDate DateofSubmission;
 
     private OrderLine orderLine;
+
+    @OneToMany(mappedBy = "order")
     private Client client;
 }
