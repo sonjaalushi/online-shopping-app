@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name="products")
 @Entity
-public class Products {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="product_id")
@@ -23,9 +23,14 @@ public class Products {
     @Column(name="price")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "order_line_id")
+    private OrderLine orderLine;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="category_id")
     private Category categoryEntity;
+
 
 }

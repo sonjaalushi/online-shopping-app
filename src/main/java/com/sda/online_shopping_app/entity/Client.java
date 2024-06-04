@@ -21,7 +21,7 @@ public class Client {
     private String name;
 
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "client")
     private List<Order> order;
 
 

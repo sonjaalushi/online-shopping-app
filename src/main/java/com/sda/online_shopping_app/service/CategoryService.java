@@ -26,8 +26,6 @@ public class CategoryService {
     }
 
 
-
-
     public Category update(Category category,Integer id){
 
         //kontrollohet nese ekziston objekti qe duam te bejme edit
