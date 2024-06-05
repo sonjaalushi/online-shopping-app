@@ -1,16 +1,16 @@
 package com.sda.online_shopping_app.controller;
 
-import com.sda.online_shopping_app.entity.Category;
+import  com.sda.online_shopping_app.entity.Category;
 import com.sda.online_shopping_app.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/category")
+@Controller
 public class CategoryController {
 
     @Autowired
@@ -24,11 +24,11 @@ public class CategoryController {
 
     @PutMapping("/updateCategory/{id}")
     public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable Integer id) {
+
         Category categoryUpdate = categoryService.update(category, id);
 
         return new ResponseEntity<>(categoryUpdate, HttpStatus.OK);
     }
-
 
     @GetMapping("/findCategory/{id}")
     public ResponseEntity<Optional<Category>> findCategory(@PathVariable Integer id) {
