@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/client")
 public class ClientController {
+
     @Autowired
     ClientService clientService;
 
@@ -26,7 +27,7 @@ public class ClientController {
 
     @GetMapping("/findClient/{id}")
     public ResponseEntity<Optional<Client>> findClient(@RequestParam Integer id){
-       Optional<Client> getClient=clientService.(id);
+       Optional<Client> getClient=clientService.findById(id);
        return new ResponseEntity<>(getClient,HttpStatus.OK);
     }
 
