@@ -1,6 +1,6 @@
 package com.sda.online_shopping_app.service;
 
-
+import java.util.List;
 import com.sda.online_shopping_app.entity.Product;
 import com.sda.online_shopping_app.exceptions.ProductNotFoundExceptions;
 import com.sda.online_shopping_app.repo.ProductRepo;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProductsService {
+public class ProductService {
 
     @Autowired
     ProductRepo productRepo;
@@ -24,6 +24,9 @@ public class ProductsService {
         productRepo.delete(product);
     }
 
+    public List<Product>getListProduct(){
+       return productRepo.findAll();
+    }
     public Product update(Product product, Integer id) {
         if (!productRepo.existsById(id)) {
             throw new ProductNotFoundExceptions("Produc not found with id: " + id);

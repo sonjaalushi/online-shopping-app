@@ -22,6 +22,7 @@ public class Category {
     @Column(name="name")
     private String name;
 
+
     @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "categoryEntity")
     private List<Product> products;
 }

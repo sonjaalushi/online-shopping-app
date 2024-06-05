@@ -17,7 +17,7 @@ public class OrderService {
 
 
     public Order save(Order order) {
-      return orderRepo.save(order);
+        return orderRepo.save(order);
     }
 
     public Optional<Order> findById(Integer id) {
@@ -25,7 +25,9 @@ public class OrderService {
                 -> new OrderNotFoundException("Not found: " + id));
     }
 
-
+    public void delete(Order order) {
+        orderRepo.delete(order);
+    }
 
 
 }

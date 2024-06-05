@@ -1,5 +1,6 @@
 package com.sda.online_shopping_app.entity;
 
+import java.util.List;
 
 import com.sda.online_shopping_app.entity.Enum.Role;
 import jakarta.persistence.*;
@@ -28,4 +29,8 @@ public class User {
     private String address;
 
     private Role role;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> product;
 }
