@@ -20,6 +20,4 @@ public class Author {
 
     private String lastName;
 
-
-
 }

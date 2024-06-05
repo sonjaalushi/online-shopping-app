@@ -9,28 +9,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="products")
+@Table(name = "products")
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_id")
+    @Column(name = "product_id")
     private Long product_id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="price")
+    @Column(name = "price")
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_line_id")
     private OrderLine orderLine;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category categoryEntity;
-
-
 }

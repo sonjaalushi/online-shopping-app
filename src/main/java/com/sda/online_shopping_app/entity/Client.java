@@ -20,7 +20,6 @@ public class Client {
 
     private String name;
 
-
     @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "client")
     private List<Order> order;
 
