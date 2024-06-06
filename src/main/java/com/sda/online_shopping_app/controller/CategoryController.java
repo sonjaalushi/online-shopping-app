@@ -5,12 +5,11 @@ import com.sda.online_shopping_app.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
-@Controller
+@RestController
+@RequestMapping("/category")
 public class CategoryController {
 
     @Autowired
@@ -26,7 +25,6 @@ public class CategoryController {
     public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable Integer id) {
 
         Category categoryUpdate = categoryService.update(category, id);
-
         return new ResponseEntity<>(categoryUpdate, HttpStatus.OK);
     }
 
@@ -35,5 +33,6 @@ public class CategoryController {
         Optional<Category> getCategory = categoryService.findById(id);
         return new ResponseEntity<>(getCategory, HttpStatus.OK);
     }
+
 
 }
