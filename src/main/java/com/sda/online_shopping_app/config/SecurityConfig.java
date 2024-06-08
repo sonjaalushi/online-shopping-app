@@ -18,20 +18,21 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
-        return  httpSecurity
-                .authorizeHttpRequests(registry->{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/admin/**").hasRole("ADMIN");
                     registry.anyRequest().permitAll();
-        })
+                })
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }
+
     @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails adminuser= User.builder()
+    public UserDetailsService userDetailsService() {
+        UserDetails adminuser = User.builder()
                 .username("admin")
-                .password("$2a$12$B64C1UvMRisEMDnPWEE0ZOIQc77Xb3tDnZZ16rFDfg.SLV2CkIrj6")
+                .password("$2a$12$DHBxqyL5Ohw92tqaKVjmwel/oQoRGYYdLsyZKmQSJnLV.NZWXCz.O")
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(adminuser);
@@ -39,7 +40,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
