@@ -16,7 +16,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long product_id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -24,10 +24,13 @@ public class Product {
     @Column(name = "price")
     private String description;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "order_line_id")
-    private OrderLine orderLine;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "url")
+    private String url;
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -37,4 +40,8 @@ public class Product {
 
     @ManyToOne()
     private User user;
+
+
+    @OneToOne(mappedBy = "product")
+    private OrderLine orderLine;
 }

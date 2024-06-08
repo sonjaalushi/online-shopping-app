@@ -15,16 +15,19 @@ import lombok.NoArgsConstructor;
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_line_id")
     private Integer id;
 
-    @OneToMany(mappedBy = "orderLine", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
 
     private Integer numberOfProducts;
 
     private Integer productPrice;
 
-    @OneToOne(mappedBy = "orderLine", cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

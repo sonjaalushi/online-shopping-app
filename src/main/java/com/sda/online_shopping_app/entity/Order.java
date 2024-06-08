@@ -11,32 +11,33 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "order_")
+@Table(name = "orders")
 @Entity
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Integer id;
 
-    private String UserName;
+    private String userName;
 
     private Integer totalCost;
 
-    private String Deliveryaddress;
+    private String deliveryaddress;
 
     private String userAddress;
 
-    private LocalDate DateofSubmission;
+    private LocalDate dateOfSubmission;
 
     private Status status;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @OneToOne
-    private OrderLine orderLine;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<OrderLine> orderLine_id;
 
 
 }

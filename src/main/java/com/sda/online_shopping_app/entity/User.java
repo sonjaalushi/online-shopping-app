@@ -16,21 +16,18 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer id;
 
     private String name;
 
     private String lastname;
 
-
     private String email;
-
 
     private String login;
 
-
     private String password;
-
 
     private String city;
 
@@ -41,7 +38,9 @@ public class User {
 
     private Role role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> orders;
 
-    @OneToMany(mappedBy = "user")
-    private List<Product> product;
+
+
 }
