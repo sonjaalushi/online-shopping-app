@@ -24,6 +24,9 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/api/signup").permitAll()
                                 .requestMatchers("/api/login").permitAll()
+                                .requestMatchers("/products/**").permitAll()
+                                .requestMatchers("/orders/**").permitAll()
+                                .requestMatchers("/category/**").permitAll()
                                 .anyRequest().authenticated()
                 );
         return http.build();
