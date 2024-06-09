@@ -2,6 +2,7 @@ package com.sda.online_shopping_app.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.sda.online_shopping_app.entity.Enum.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,6 @@ public class User {
 
     private String email;
 
-    private String login;
-
     private String password;
 
     private String city;
@@ -36,6 +35,7 @@ public class User {
     private String address;
 
 
+    @JsonEnumDefaultValue
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

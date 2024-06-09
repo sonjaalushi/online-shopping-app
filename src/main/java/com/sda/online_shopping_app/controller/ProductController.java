@@ -59,6 +59,7 @@ public class ProductController {
         try {
             productService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
         } catch (ProductNotFoundExceptions e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -69,5 +70,6 @@ public class ProductController {
         List<Product> filteredProducts = productService.filterByName(name);
         return new ResponseEntity<>(filteredProducts, HttpStatus.OK);
     }
+
 
 }

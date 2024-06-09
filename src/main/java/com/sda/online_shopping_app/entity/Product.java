@@ -37,10 +37,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category categoryEntity;
 
-
     @ManyToOne()
     private User user;
-
 
     @OneToOne(mappedBy = "product")
     private OrderLine orderLine;

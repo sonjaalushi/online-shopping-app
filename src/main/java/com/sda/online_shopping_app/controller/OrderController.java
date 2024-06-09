@@ -18,14 +18,14 @@ public class OrderController {
     private OrderService orderService;
 
     // Create a new order
-    @PostMapping
+    @PostMapping("/addOrders")
     public ResponseEntity<Order> create(@RequestBody Order order) {
         Order createdOrder = orderService.save(order);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
 
     // Retrieve an order by its ID
-    @GetMapping("/{id}")
+    @GetMapping("/findById/{id}")
     public ResponseEntity<Order> findById(@PathVariable Integer id) {
         try {
             Order order = orderService.findById(id);
@@ -36,14 +36,14 @@ public class OrderController {
     }
 
     // Retrieve all orders
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<Order>> findAll() {
         List<Order> orders = orderService.findAll();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     // Update an existing order
-    @PutMapping("/{id}")
+    @PutMapping("/updateById/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody Order orderDetails) {
         try {
             Order updatedOrder = orderService.updateOrder(id, orderDetails);
@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     // Delete an order
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         try {
             Order order = orderService.findById(id);
@@ -64,4 +64,5 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }
