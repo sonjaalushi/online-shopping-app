@@ -6,18 +6,27 @@ import com.sda.online_shopping_app.repo.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CategoryService {
     @Autowired
     CategoryRepo categoryRepo;
 
+
+    public List<Category>getAlL(){
+        return categoryRepo.findAll();
+    }
     public Category saveCategory(Category category) {
         return categoryRepo.save(category);
     }
 
     public void deleteCategory(Category category) {
         categoryRepo.delete(category);
+    }
+
+    public void deleteById(Integer id) {
+        categoryRepo.deleteById(id);
     }
 
     public Optional<Category> findById(Integer id) {

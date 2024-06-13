@@ -43,11 +43,10 @@ public class ProductService {
         return productRepo.save(product);
     }
 
-    // Delete a product by ID
-    public void delete(Integer id) {
-        Product product = findById(id); // This will throw exception if not found
-        productRepo.delete(product);
+    public void deleteByid(Integer id) {
+        productRepo.deleteById(id);
     }
+
     public List<Product> filterByName(String name) {
         return productRepo.findByName(name);
     }
