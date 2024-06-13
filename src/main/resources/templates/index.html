@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Online Shopping</title>
+</head>
+<body>
+<h1>Welcome to Our Online Shop</h1>
+<div>
+    <h2>Categories</h2>
+    <ul>
+        <li th:each="category : ${categories}">
+            <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

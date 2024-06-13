@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User</title>
+</head>
+<body>
+<h1>User Details</h1>
+<form th:object="${user}" method="post" action="/users/save">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Name:</label>
+    <input type="text" th:field="*{name}"/><br/>
+    <label>Last Name:</label>
+    <input type="text" th:field="*{lastname}"/><br/>
+    <label>Email:</label>
+    <input type="email" th:field="*{email}"/><br/>
+    <label>City:</label>
+    <input type="text" th:field="*{city}"/><br/>
+    <label>Avatar:</label>
+    <input type="text" th:field="*{avatar}"/><br/>
+    <label>Address:</label>
+    <input type="text" th:field="*{address}"/><br/>
+    <label>Role:</label>
+    <input type="text" th:field="*{role}"/><br/>
+    <button type="submit">Save</button>
+</form>
+
+<h2>Orders</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Total Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${user.orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.totalCost}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
