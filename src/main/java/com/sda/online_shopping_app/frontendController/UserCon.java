@@ -34,7 +34,7 @@ public class UserCon {
     @GetMapping("/new")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "user";
+        return "userForm";
     }
 
     @PostMapping("/save")
@@ -43,7 +43,7 @@ public class UserCon {
             throw new RuntimeException("A");
         } else {
             userService.save(user);
-            return "redirect:/users/";
+            return "redirect:/users";
         }
     }
 

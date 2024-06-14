@@ -42,4 +42,7 @@ public class Product {
 
     @OneToOne(mappedBy = "product")
     private OrderLine orderLine;
+
+    @OneToOne(mappedBy = "product")
+    private Order order;
 }

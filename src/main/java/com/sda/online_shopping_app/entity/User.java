@@ -34,6 +34,8 @@ public class User {
 
     private String address;
 
+    @OneToMany(mappedBy = "user")
+    public List<Product>productList;
 
     @JsonEnumDefaultValue
     private Role role;
