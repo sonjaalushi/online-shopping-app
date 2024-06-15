@@ -35,6 +35,11 @@ public class CategoryService {
     }
 
 
+    public Category getById(Integer id){
+        return categoryRepo.getById(id);
+    }
+
+
     public Category update(Category category,Integer id){
 
         //kontrollohet nese ekziston objekti qe duam te bejme edit

@@ -1,7 +1,6 @@
 package com.sda.online_shopping_app.entity;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.sda.online_shopping_app.entity.Enum.Role;
 import jakarta.persistence.*;
@@ -15,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user")
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -34,8 +34,6 @@ public class User {
 
     private String address;
 
-    @OneToMany(mappedBy = "user")
-    public List<Product>productList;
 
     @JsonEnumDefaultValue
     private Role role;

@@ -16,6 +16,22 @@ public class OrderLineService {
     private OrderLineRepo orderLineRepo;
 
 
+
+
+    public OrderLine updateOrderLine(Integer id, OrderLine updatedOrderLine) {
+        OrderLine orderLine = orderLineRepo.findById(id).orElse(null);
+        if (orderLine != null) {
+            orderLine.setProduct(updatedOrderLine.getProduct());
+            orderLine.setNumberOfProducts(updatedOrderLine.getNumberOfProducts());
+            orderLine.setProductPrice(updatedOrderLine.getProductPrice());
+            orderLine.setOrder(updatedOrderLine.getOrder());
+            return orderLineRepo.save(orderLine);
+        }
+        return null;
+    }
+
+
+
     public OrderLine save(OrderLine orderLine) {
         return orderLineRepo.save(orderLine);
     }

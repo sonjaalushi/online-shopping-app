@@ -1,6 +1,5 @@
 package com.sda.online_shopping_app.entity;
 
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
