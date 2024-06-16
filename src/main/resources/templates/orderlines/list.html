@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Lines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+        /* Additional CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .actions a:hover {
+            color: #007bff;
+        }
+
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Order Lines</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Number of Products</th>
+        <th>Product Price</th>
+        <th>Order</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orderLine : ${orderLines}">
+        <td th:text="${orderLine.id}"></td>
+        <td th:text="${orderLine.product.name}"></td>
+        <td th:text="${orderLine.numberOfProducts}"></td>
+        <td th:text="${orderLine.productPrice}"></td>
+        <td th:text="${orderLine.order.id}"></td>
+        <td class="actions">
+            <a th:href="@{/orderlines/edit/{id}(id=${orderLine.id})}">Edit</a>
+            <a th:href="@{/orderlines/delete/{id}(id=${orderLine.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a class="add-link" href="/orderlines/new">Add New Order Line</a>
+</body>
+</html>
