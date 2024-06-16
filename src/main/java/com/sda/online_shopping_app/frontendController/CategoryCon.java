@@ -48,11 +48,11 @@ public class CategoryCon {
         return "redirect:/categories";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteCategory(@PathVariable("id") Integer id) {
-//        categoryService.deleteCategory(id);
-//        return "redirect:/categories";
-//    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable("id") Integer id) {
+        categoryService.deleteById(id);
+        return "redirect:/categories";
+    }
 
 
 

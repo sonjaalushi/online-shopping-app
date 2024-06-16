@@ -13,6 +13,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
+
     @Autowired
     private UserService userService;
 
@@ -49,11 +51,11 @@ public class UserController {
         return "redirect:/users";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteUser(@PathVariable("id") Integer id) {
-//        userService.deleteUser(id);
-//        return "redirect:/users";
-//    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Integer id) {
+        userService.delete(id);
+        return "redirect:/users";
+    }
 
 
 

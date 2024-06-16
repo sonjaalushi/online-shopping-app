@@ -63,9 +63,9 @@ public class OrderLineController {
         return "redirect:/orderlines";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteOrderLine(@PathVariable("id") Integer id) {
-//        orderLineService.deleteOrderLine(id);
-//        return "redirect:/orderlines";
-//    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteOrderLine(@PathVariable("id") Integer id) {
+        orderLineService.deleteByID(id);
+        return "redirect:/orderlines";
+    }
 }
