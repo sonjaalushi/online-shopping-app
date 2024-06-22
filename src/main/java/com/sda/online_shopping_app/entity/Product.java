@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,14 +36,19 @@ public class Product {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    private Category categoryEntity;
+    @ToString.Exclude
+    private Category category;
 
     @ManyToOne()
     private User user;
+
+
 
     @OneToOne(mappedBy = "product")
     private OrderLine orderLine;
 
     @OneToOne(mappedBy = "product")
     private Order order;
+
+
 }

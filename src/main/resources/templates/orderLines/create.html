@@ -75,7 +75,7 @@
 </head>
 <body>
 <h1>Create Order Line</h1>
-<form action="#" th:action="@{/orderlines}" th:object="${orderLine}" method="post">
+<form action="#" th:action="@{/orderLines}" th:object="${orderLine}" method="post">
     <div>
         <label for="product">Product:</label>
         <select id="product" th:field="*{product}">
@@ -93,13 +93,13 @@
     <div>
         <label for="order">Order:</label>
         <select id="order" th:field="*{order}">
-            <option th:each="order : ${orders}" th:value="${order}" th:text="${order.id}"></option>
+            <option th:each="order : ${orders}" th:value="${order}" th:text="${order.userName}"></option>
         </select>
     </div>
     <div>
         <button type="submit">Save</button>
     </div>
 </form>
-<a href="/orderlines">Back to List</a>
+<a href="orderLines/list">Back to List</a>
 </body>
 </html>

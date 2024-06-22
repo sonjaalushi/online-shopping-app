@@ -34,16 +34,9 @@ public class Order {
     private Status status;
 
 
-
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
-
-
-
-
-
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

@@ -1,111 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Create Product</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
         }
-
         h1 {
-            text-align: center;
             color: #333;
-            margin-top: 20px;
         }
-
         form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 600px;
         }
-
-        form div {
-            margin-bottom: 15px;
-        }
-
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #555;
         }
-
         input[type="text"],
-        textarea,
-        select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        input[type="file"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
         }
-
-        textarea {
-            resize: vertical;
-        }
-
-        button {
-            display: inline-block;
-            padding: 10px 20px;
+        input[type="submit"] {
+            background-color: #007bff;
             color: #fff;
-            background-color: #28a745;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
         }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
+        input[type="submit"]:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 <h1>Create Product</h1>
-<form action="#" th:action="@{/products}" th:object="${product}" method="post">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}" />
-    </div>
-    <div>
-        <label for="description">Description:</label>
-        <textarea id="description" th:field="*{description}"></textarea>
-    </div>
-    <div>
-        <label for="author">Author:</label>
-        <input type="text" id="author" th:field="*{author}" />
-    </div>
-    <div>
-        <label for="url">URL:</label>
-        <input type="text" id="url" th:field="*{url}" />
-    </div>
-    <div>
-        <label for="categoryEntity">Category:</label>
-        <select id="categoryEntity" th:field="*{categoryEntity}">
-            <option th:each="category : ${categories}" th:value="${category}" th:text="${category.name}"></option>
-        </select>
-    </div>
-    <div>
-        <button type="submit">Save</button>
-    </div>
+
+
+
+<form  action="#" th:action="@{/products}" th:object="${product}" method="post">
+
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required />
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:field="*{description}" required />
+
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" th:field="*{author}" required />
+
+    <label for="url">Url:</label>
+    <input type="text" id="url" name="url" th:field="*{url}" required />
+
+    <label for="category">Category:</label>
+    <select id="category" name="category" th:field="*{category.id}" required>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+
+    <input type="submit" value="Save">
 </form>
+
 <a href="/products">Back to List</a>
 </body>
 </html>

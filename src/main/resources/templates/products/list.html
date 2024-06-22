@@ -86,12 +86,21 @@
         <td th:text="${product.description}"></td>
         <td th:text="${product.author}"></td>
         <td th:text="${product.url}"></td>
-        <td th:text="${product.categoryEntity.name}"></td>
+        <td th:text="${product.category.name}"></td>
+
+
+        <form th:action="@{/orders}" method="post">
+            <input type="hidden" id="productId" name="productId" th:value="${product.id}" />
+            <input type="submit" value="Book Product">
+        </form>
+
         <td>
             <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
             <a th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
         </td>
     </tr>
+
+
     </tbody>
 </table>
 <a href="/products/new" class="button">Add New Product</a>

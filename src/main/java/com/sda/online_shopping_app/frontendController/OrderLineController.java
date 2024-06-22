@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/orderlines")
+@RequestMapping("/orderLines")
 public class OrderLineController {
 
 
@@ -30,7 +29,7 @@ public class OrderLineController {
     public String listOrderLines(Model model) {
         List<OrderLine> orderLines = orderLineService.getAll();
         model.addAttribute("orderLines", orderLines);
-        return "orderlines/list";
+        return "orderLines/list";
     }
 
     @GetMapping("/new")
@@ -38,34 +37,41 @@ public class OrderLineController {
         model.addAttribute("orderLine", new OrderLine());
         model.addAttribute("products", productService.findAll());
         model.addAttribute("orders", orderService.findAll());
-        return "orderlines/create";
+        return "orderLines/create";
     }
 
     @PostMapping
     public String saveOrderLine(@ModelAttribute("orderLine") OrderLine orderLine) {
         orderLineService.save(orderLine);
-        return "redirect:/orderlines";
+        return "redirect:/orderLines/list";
     }
 
     @GetMapping("/edit/{id}")
     public String editOrderLineForm(@PathVariable("id") Integer id, Model model) {
+
+
         Optional<OrderLine> orderLine = orderLineService.findByID(id);
+
+
+
         model.addAttribute("orderLine", orderLine);
         model.addAttribute("products", productService.findAll());
         model.addAttribute("orders", orderService.findAll());
-        return "orderlines/edit";
+        return "orderLines/edit";
     }
 
     @PostMapping("/update/{id}")
     public String updateOrderLine(@PathVariable("id") Integer id, @ModelAttribute("orderLine") OrderLine orderLine) {
         orderLine.setId(id);
         orderLineService.save(orderLine);
-        return "redirect:/orderlines";
+        return "redirect:/orderLines";
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteOrderLine(@PathVariable("id") Integer id) {
         orderLineService.deleteByID(id);
-        return "redirect:/orderlines";
+        return "redirect:/orderLines";
     }
+
+
 }

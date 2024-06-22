@@ -20,12 +20,13 @@ public class Category {
     @Column(name = "column_id")
     private Integer id;
 
+
     @Column(name="name")
     private String name;
 
     private CategoryType categoryType;
 
 
-    @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "categoryEntity")
+    @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER ,mappedBy = "category")
     private List<Product> products;
 }
