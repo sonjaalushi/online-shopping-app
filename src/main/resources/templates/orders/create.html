@@ -102,16 +102,12 @@
         </select>
     </div>
     <div>
-
-
         <label for="product">Product:</label>
         <select id="product" th:field="*{product.id}">
             <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
         </select>
-
-
-
-
+    </div>
+    <div>
         <button type="submit">Save</button>
     </div>
 </form>
