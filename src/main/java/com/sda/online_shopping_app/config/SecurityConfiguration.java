@@ -26,15 +26,20 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
+        httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/products/list").hasRole("USER");
                     registry.requestMatchers("/products/new").hasRole("ADMIN");
                     registry.anyRequest().permitAll();
                 })
-                .httpBasic(withDefaults())
-                .build();
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .successHandler(new CustomAuthenticationSuccessHandler())
+                )
+                .httpBasic(withDefaults());
+
+        return httpSecurity.build();
     }
 
     @Bean
