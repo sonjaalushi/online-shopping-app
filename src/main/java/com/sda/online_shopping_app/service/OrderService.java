@@ -4,7 +4,7 @@ import com.sda.online_shopping_app.entity.Enum.Status;
 import com.sda.online_shopping_app.entity.Order;
 import com.sda.online_shopping_app.entity.OrderLine;
 import com.sda.online_shopping_app.entity.Product;
-import com.sda.online_shopping_app.entity.User;
+import com.sda.online_shopping_app.entity.UserEntity;
 import com.sda.online_shopping_app.exceptions.OrderNotFoundException;
 import com.sda.online_shopping_app.repo.OrderRepo;
 import com.sda.online_shopping_app.repo.ProductRepo;
@@ -50,7 +50,7 @@ public class OrderService {
         return orderRepo.save(existingOrder);
     }
 
-    public void createOrder(User user, Integer productId) {
+    public void createOrder(UserEntity user, Integer productId) {
         // Get the product by id
         Product product = productRepo.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
 

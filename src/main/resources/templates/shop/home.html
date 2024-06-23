@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In & Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .signin-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 25%;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Sign Up Form -->
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form th:action="@{/shop/signup}" th:object="${user}" method="post">
+            < <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" />
+        </div>
+            <div>
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" th:field="*{lastname}" />
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" />
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" />
+            </div>
+            <div>
+                <label for="city">City:</label>
+                <input type="text" id="city" th:field="*{city}" />
+            </div>
+            <div>
+                <label for="avatar">Avatar:</label>
+                <input type="text" id="avatar" th:field="*{avatar}" />
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="address" th:field="*{address}" />
+            </div>
+            <div>
+                <label for="role">Role:</label>
+                <select id="role" th:field="*{role}">
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
+        </form>
+        <div th:if="${error}">
+            <p class="error" th:text="${error}">Error message will be shown here.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Sign In Form -->
+<div class="signin-container">
+    <h2>Sign In</h2>
+    <form th:action="@{/shop/signin}" th:object="${user}" method="post">
+        <div>
+            <label for="signin-email">Email:</label>
+            <input type="text" id="signin-email" th:field="*{email}" required>
+        </div>
+        <div>
+            <label for="signin-password">Password:</label>
+            <input type="password" id="signin-password" th:field="*{password}" required>
+        </div>
+        <div>
+            <button type="submit">Sign In</button>
+        </div>
+    </form>
+    <div th:if="${error}">
+        <p class="error">Invalid email or password. Please try again.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,48 +1,45 @@
 package com.sda.online_shopping_app.service;
 
-import com.sda.online_shopping_app.entity.User;
+import com.sda.online_shopping_app.entity.UserEntity;
 import com.sda.online_shopping_app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserRepo userRepository;
+    private PasswordEncoder passwordEncoder;
 
 
-    public User save(User user) {
+    @Autowired
+    private  UserRepo userRepository;
+
+
+    public UserEntity save(UserEntity user) {
         return userRepository.save(user);
-
     }
 
-    public Optional<User> getById(Integer id) {
+    public Optional<UserEntity> getById(Integer id) {
         return userRepository.findById(id);
     }
 
-    public List<User> getAll() {
+    public Optional<UserEntity> getByEmail(String email) {
+        return userRepository.getByEmail(email);
+    }
 
-        List<User> u = userRepository.findAll();
-
-        return u;
+    public List<UserEntity> getAll() {
+        return userRepository.findAll();
     }
 
     public void delete(Integer id){
         userRepository.deleteById(id);
     }
 
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public User registerUser(User user) {
+    public UserEntity registerUser(UserEntity user) {
         if (userRepository.getByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("Email already in use");
         }
@@ -50,16 +47,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> loginUser(String email, String password) {
-        Optional<User> userOptional = userRepository.getByEmail(email);
+    public Optional<UserEntity> loginUser(String email, String password) {
+        Optional<UserEntity> userOptional = userRepository.getByEmail(email);
         if (userOptional.isPresent()) {
-            User user = userOptional.get();
+            UserEntity user = userOptional.get();
             if (passwordEncoder.matches(password, user.getPassword())) {
                 return Optional.of(user);
             }
         }
         return Optional.empty();
     }
-
 
 }
