@@ -100,7 +100,10 @@
         <td th:text="${user.role}"></td>
         <td>
             <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a>
-            <a th:href="@{/users/delete/{id}(id=${user.id})}">Delete</a>
+            <form th:action="@{/users/delete/{id}(id=${user.id})}" method="post" style="display: inline;">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" style="background: none; border: none; color: #007bff; cursor: pointer; text-decoration: underline; padding: 0; font: inherit;">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>

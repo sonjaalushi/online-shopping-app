@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/signup")
     public String signUp(@ModelAttribute("user") UserEntity user) {
         UserEntity newUser = userService.registerUser(user);
-        return "redirect:/products/list";
+        return "redirect:/users";
     }
 
     @PostMapping("/signin")
@@ -64,10 +64,10 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.delete(id);
-        return "redirect:/users";
+        return "redirect:/users/list";
     }
 
 
