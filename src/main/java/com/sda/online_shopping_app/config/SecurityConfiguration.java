@@ -1,6 +1,6 @@
 package com.sda.online_shopping_app.config;
 
-import com.sda.online_shopping_app.entity.MyUserDetails;
+import com.sda.online_shopping_app.entity.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,24 +22,19 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Autowired
-    private MyUserDetails myUserDetails;
+    private MyUserDetailsService myUserDetails;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-      return httpSecurity
+        return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/products/list").hasRole("USER");
                     registry.requestMatchers("/products/new").hasRole("ADMIN");
                     registry.anyRequest().permitAll();
                 })
-              .formLogin(httpSecurityFormLoginConfigurer -> {
-                  httpSecurityFormLoginConfigurer.loginPage("/login")
-                          .successHandler(new AuthenticationSuccesHandler())
-                          .permitAll();
-              })
-              .build();
-
+                .httpBasic(withDefaults())
+                .build();
     }
 
     @Bean

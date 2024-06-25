@@ -1,7 +1,9 @@
 package com.sda.online_shopping_app.frontendController;
 
 
+import com.sda.online_shopping_app.entity.Enum.Status;
 import com.sda.online_shopping_app.entity.Order;
+import com.sda.online_shopping_app.entity.Product;
 import com.sda.online_shopping_app.service.OrderService;
 import com.sda.online_shopping_app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -19,6 +22,30 @@ public class OrderController {
 
     @Autowired
     private ProductService productService;
+
+//
+//    @GetMapping("/new/{productId}")
+//    public String showOrderForm(@PathVariable Integer productId, Model model) {
+//        model.addAttribute("productId", productId);
+//        return "orderForm";
+//    }
+//
+//    @PostMapping
+//    public String createOrder(@RequestParam Integer productId,
+//                              @RequestParam String userName,
+//                              @RequestParam String deliveryaddress,
+//                              @RequestParam String userAddress) {
+//        Product product = productService.findById(productId);
+//        Order order = new Order();
+//        order.setProduct(product);
+//        order.setUserName(userName);
+//        order.setDeliveryaddress(deliveryaddress);
+//        order.setUserAddress(userAddress);
+//        order.setDateOfSubmission(LocalDate.now());
+//        order.setStatus(Status.ACTIVE);
+//        orderService.save(order);
+//        return "redirect:/products";
+//    }
 
     @GetMapping
     public String listOrders(Model model) {
@@ -61,4 +88,6 @@ public class OrderController {
         orderService.delete(id);
         return "redirect:/orders";
     }
+
+
 }
