@@ -22,10 +22,10 @@ public class HomePage {
     private ProductService productService;
 
 
-    @GetMapping("/log")
-    public String log(){
-        return "shop/login";
-    }
+//    @GetMapping("/")
+//    public String homePage() {
+//        return "home"; // This will return "home.html" because of Thymeleaf's template resolution
+//    }
 
 
 //    @GetMapping("/signup")
@@ -35,32 +35,35 @@ public class HomePage {
 //    }
 
 
-
-    @GetMapping
+    @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("user", new UserEntity());
         return "shop/home";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signUp")
     public String signUp(@ModelAttribute("user") UserEntity user) {
         userService.registerUser(user);
         return "redirect:/shop/home";
     }
 
-
     @PostMapping("/signin")
     public String signIn(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
-        Optional<UserEntity> user = userService.loginUser(email, password);
-        if (user.isPresent()) {
-            session.setAttribute("loggedInUser", user.get());
-            return "redirect:/products/list";
+
+        Optional<UserEntity> userOptional = userService.loginUser(email, password);
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            session.setAttribute("loggedInUser", user);
+            if (user.getRole().equals("USER")) {
+                return "redirect:/products/list";
+            } else if (user.getRole().equals("ADMIN")) {
+                return "redirect:/products/listAdmin";
+            } else {
+                return "redirect:/";
+            }
         } else {
             model.addAttribute("error", true);
-            return "shop/home"; // ensure this matches the template name
+            return "shop/home";
         }
     }
-
-
-
 }

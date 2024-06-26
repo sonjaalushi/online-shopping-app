@@ -10,12 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-
-//    private static final String UPLOADED_FOLDER = "uploads/";
 
     @Autowired
     private ProductService productService;
@@ -23,76 +20,44 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-
-    @GetMapping
+    @GetMapping("/list")
     public String listProducts(Model model) {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
-        return "products/list";
+        return "products/list"; // Ensure this template exists
     }
-
-//
-//    @PostMapping("/{id}/upload")
-//    public ResponseEntity<?> uploadFile(@PathVariable Integer id, @RequestParam("file") MultipartFile file) {
-//        if (file.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please select a file to upload");
-//        }
-//        try {
-//            byte[] bytes = file.getBytes();
-//            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-//            Files.write(path, bytes);
-//
-//
-//            Product product = productService.findById(id);
-//            if (product != null) {
-//                product.setUrl(path.toString());
-//                productService.save(product);
-//                return ResponseEntity.status(HttpStatus.OK).body("Successfully uploaded - " + file.getOriginalFilename());
-//            } else {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
-//            }
-//        } catch (IOException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file - " + e.getMessage());
-//        }
-//    }
-
 
     @GetMapping("/new")
     public String createProductForm(Model model) {
-
         model.addAttribute("product", new Product());
-
         List<Category> categories = categoryService.getAlL();
-
         model.addAttribute("categories", categories);
-
-        return "products/create";
+        return "products/create"; // Ensure this template exists
     }
 
     @PostMapping
     public String saveProduct(@ModelAttribute Product product) {
         productService.save(product);
-        return "redirect:/products";
+        return "redirect:/products/list";
     }
 
     @GetMapping("/edit/{id}")
     public String editProductForm(@PathVariable("id") Integer id, Model model) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "products/edit";
+        return "products/edit"; // Ensure this template exists
     }
 
     @PostMapping("/update/{id}")
     public String updateProduct(@PathVariable("id") Integer id, @ModelAttribute("product") Product product) {
         product.setId(id);
         productService.save(product);
-        return "redirect:/products";
+        return "redirect:/products/list";
     }
-
 
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Integer id) {
         productService.deleteByid(id);
-        return "redirect:/products";
+        return "redirect:/products/list";
     }
 }
