@@ -1,5 +1,6 @@
 package com.sda.online_shopping_app.frontendController;
 
+import com.sda.online_shopping_app.entity.Enum.Role;
 import com.sda.online_shopping_app.entity.UserEntity;
 import com.sda.online_shopping_app.service.ProductService;
 import com.sda.online_shopping_app.service.UserService;
@@ -47,21 +48,22 @@ public class HomePage {
         return "redirect:/shop/home";
     }
 
+
     @PostMapping("/signin")
     public String signIn(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
         Optional<UserEntity> userOptional = userService.loginUser(email, password);
+
         if (userOptional.isPresent()) {
             UserEntity user = userOptional.get();
-
             session.setAttribute("loggedInUser", user);
 
-            if (user.getRole().equals("ADMIN")) {
-                return "redirect:/listAdmin";
-            } else if (user.getRole().equals("1")) {
-                return "redirect:/list";
+            if (user.getRole() == Role.ADMIN)  {
+                return "redirect:/products/create";
             }
-            else {
-                return "redirect:/error";
+            else if(user.getRole() == Role.USER) {
+                return "redirect:/products/list";
+            } else {
+                return "redirect:/shop/home";
             }
         } else {
             model.addAttribute("error", true);

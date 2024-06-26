@@ -26,8 +26,8 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(registry -> {
-//                    registry.requestMatchers("/products/list").hasRole("USER");
-//                    registry.requestMatchers("/products/new").hasRole("ADMIN");
+                    registry.requestMatchers("/products/list").hasRole("USER");
+                    registry.requestMatchers("/products/new").hasRole("ADMIN");
                     registry.requestMatchers(HttpMethod.DELETE, "/products/delete/**").hasRole("ADMIN");
                     registry.anyRequest().permitAll();
                 })

@@ -33,7 +33,7 @@ public class ProductController {
     public String listProducts(Model model) {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
-        return "products/list"; // Ensure this template exists
+        return "products/list";
     }
 
     @GetMapping("/new")
@@ -41,7 +41,7 @@ public class ProductController {
         model.addAttribute("product", new Product());
         List<Category> categories = categoryService.getAlL();
         model.addAttribute("categories", categories);
-        return "products/create"; // Ensure this template exists
+        return "products/create";
     }
 
     @PostMapping
@@ -54,7 +54,7 @@ public class ProductController {
     public String editProductForm(@PathVariable("id") Integer id, Model model) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "products/edit"; // Ensure this template exists
+        return "products/edit";
     }
 
     @PostMapping("/update/{id}")
@@ -69,4 +69,6 @@ public class ProductController {
         productService.deleteByid(id);
         return "redirect:/products/list";
     }
+
+
 }

@@ -1,7 +1,6 @@
 package com.sda.online_shopping_app.entity;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.sda.online_shopping_app.entity.Enum.Role;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
@@ -39,7 +38,7 @@ public class UserEntity {
     private String address;
 
 
-    @JsonEnumDefaultValue
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

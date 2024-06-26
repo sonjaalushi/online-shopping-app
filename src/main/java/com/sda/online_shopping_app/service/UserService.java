@@ -52,6 +52,7 @@ public class UserService {
         if (userOptional.isPresent()) {
             UserEntity user = userOptional.get();
             if (passwordEncoder.matches(password, user.getPassword())) {
+
                 return Optional.of(user);
             }
         }
