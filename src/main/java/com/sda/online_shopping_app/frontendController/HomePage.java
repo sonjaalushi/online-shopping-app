@@ -49,17 +49,19 @@ public class HomePage {
 
     @PostMapping("/signin")
     public String signIn(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
-
         Optional<UserEntity> userOptional = userService.loginUser(email, password);
         if (userOptional.isPresent()) {
             UserEntity user = userOptional.get();
+
             session.setAttribute("loggedInUser", user);
-            if (user.getRole().equals("USER")) {
-                return "redirect:/products/list";
-            } else if (user.getRole().equals("ADMIN")) {
-                return "redirect:/products/listAdmin";
-            } else {
-                return "redirect:/";
+
+            if (user.getRole().equals("ADMIN")) {
+                return "redirect:/listAdmin";
+            } else if (user.getRole().equals("1")) {
+                return "redirect:/list";
+            }
+            else {
+                return "redirect:/error";
             }
         } else {
             model.addAttribute("error", true);

@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
@@ -27,8 +26,8 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/products/list").hasRole("USER");
-                    registry.requestMatchers("/products/new").hasRole("ADMIN");
+//                    registry.requestMatchers("/products/list").hasRole("USER");
+//                    registry.requestMatchers("/products/new").hasRole("ADMIN");
                     registry.requestMatchers(HttpMethod.DELETE, "/products/delete/**").hasRole("ADMIN");
                     registry.anyRequest().permitAll();
                 })
