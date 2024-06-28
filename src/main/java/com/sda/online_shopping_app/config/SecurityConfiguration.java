@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                     registry.anyRequest().permitAll();
                 })
                 .formLogin(form -> form
-                        .loginPage("/signin")
+                        .loginProcessingUrl("/login")
                         .successHandler(authenticationSuccessHandler())
                         .permitAll())
                 .httpBasic(withDefaults())

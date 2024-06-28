@@ -17,10 +17,6 @@ public class UserController {
 
 
 
-    @GetMapping("/home")
-    public String home(){
-        return "home";
-    }
 
     @Autowired
     private UserService userService;
@@ -38,11 +34,11 @@ public class UserController {
         return "users/create";
     }
 
-    @PostMapping("/signup")
-    public String signUp(@ModelAttribute("user") UserEntity user) {
-        UserEntity newUser = userService.registerUser(user);
-        return "redirect:/users";
-    }
+//    @PostMapping("/signup")
+//    public String signUp(@ModelAttribute("user") UserEntity user) {
+//        UserEntity newUser = userService.registerUser(user);
+//        return "redirect:/users";
+//    }
 
 //    @PostMapping("/signin")
 //    public String signIn(@RequestParam String email, @RequestParam String password, Model model) {
@@ -58,27 +54,27 @@ public class UserController {
 //    }
 
 
-    @PostMapping("/signin")
-    public String signIn(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
-
-        Optional<UserEntity> user = userService.loginUser(email, password);
-
-        if (user.isPresent()) {
-
-            UserEntity loggedInUser = user.get();
-
-            session.setAttribute("user", loggedInUser);
-
-            if ("ADMIN".equals(loggedInUser.getRole())) {
-                return "redirect:/users/home";
-            } else {
-                return "redirect:/products/list";
-            }
-        } else {
-            model.addAttribute("error", "Invalid email or password.");
-            return "signin";
-        }
-    }
+//    @PostMapping("/signin")
+//    public String signIn(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+//
+//        Optional<UserEntity> user = userService.loginUser(email, password);
+//
+//        if (user.isPresent()) {
+//
+//            UserEntity loggedInUser = user.get();
+//
+//            session.setAttribute("user", loggedInUser);
+//
+//            if ("ADMIN".equals(loggedInUser.getRole())) {
+//                return "redirect:/users/home";
+//            } else {
+//                return "redirect:/products/list";
+//            }
+//        } else {
+//            model.addAttribute("error", "Invalid email or password.");
+//            return "signin";
+//        }
+//    }
 
 
     @GetMapping("/edit/{id}")

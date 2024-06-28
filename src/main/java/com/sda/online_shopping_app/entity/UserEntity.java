@@ -38,8 +38,7 @@ public class UserEntity {
     private String address;
 
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Order> orders;
@@ -108,11 +107,11 @@ public class UserEntity {
         this.address = address;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
