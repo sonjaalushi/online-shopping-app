@@ -1,7 +1,5 @@
 package com.sda.online_shopping_app.frontendController;
 
-
-import com.sda.online_shopping_app.entity.Enum.Status;
 import com.sda.online_shopping_app.entity.Order;
 import com.sda.online_shopping_app.entity.Product;
 import com.sda.online_shopping_app.service.OrderService;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -46,6 +42,19 @@ public class OrderController {
 //        orderService.save(order);
 //        return "redirect:/products";
 //    }
+
+
+
+    @GetMapping("/new/{productId}")
+    public String createOrderForm(@PathVariable("productId") Integer productId, Model model) {
+        Product product = productService.findById(productId);
+        Order order = new Order();
+        order.setProduct(product);
+        model.addAttribute("order", order);
+        return "orders/create";
+    }
+
+
 
     @GetMapping
     public String listOrders(Model model) {
