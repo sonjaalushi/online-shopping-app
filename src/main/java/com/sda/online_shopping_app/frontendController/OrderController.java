@@ -1,5 +1,6 @@
 package com.sda.online_shopping_app.frontendController;
 
+import com.sda.online_shopping_app.entity.Enum.Status;
 import com.sda.online_shopping_app.entity.Order;
 import com.sda.online_shopping_app.entity.Product;
 import com.sda.online_shopping_app.service.OrderService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -19,41 +22,15 @@ public class OrderController {
     @Autowired
     private ProductService productService;
 
-//
-//    @GetMapping("/new/{productId}")
-//    public String showOrderForm(@PathVariable Integer productId, Model model) {
-//        model.addAttribute("productId", productId);
-//        return "orderForm";
-//    }
-//
-//    @PostMapping
-//    public String createOrder(@RequestParam Integer productId,
-//                              @RequestParam String userName,
-//                              @RequestParam String deliveryaddress,
-//                              @RequestParam String userAddress) {
-//        Product product = productService.findById(productId);
-//        Order order = new Order();
-//        order.setProduct(product);
-//        order.setUserName(userName);
-//        order.setDeliveryaddress(deliveryaddress);
-//        order.setUserAddress(userAddress);
-//        order.setDateOfSubmission(LocalDate.now());
-//        order.setStatus(Status.ACTIVE);
-//        orderService.save(order);
-//        return "redirect:/products";
-//    }
-
-
 
     @GetMapping("/new/{productId}")
-    public String createOrderForm(@PathVariable("productId") Integer productId, Model model) {
+        public String createOrderForm(@PathVariable("productId") Integer productId, Model model) {
         Product product = productService.findById(productId);
         Order order = new Order();
         order.setProduct(product);
         model.addAttribute("order", order);
         return "orders/create";
     }
-
 
 
     @GetMapping
@@ -65,15 +42,13 @@ public class OrderController {
 
     @GetMapping("/new")
     public String createOrderForm(Model model) {
-
         model.addAttribute("order", new Order());
         model.addAttribute("products", productService.findAll());
-
         return "orders/create";
     }
 
     @PostMapping
-    public String saveOrder(@ModelAttribute("order") Order order) {
+    public String saveOrder(Order order) {
         orderService.save(order);
         return "redirect:/orders";
     }
@@ -97,6 +72,5 @@ public class OrderController {
         orderService.delete(id);
         return "redirect:/orders";
     }
-
 
 }

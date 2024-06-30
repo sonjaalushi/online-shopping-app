@@ -19,6 +19,8 @@ public class ProductService {
         return productRepo.save(product);
     }
 
+
+
     public Product findById(Integer id) {
         return productRepo.findById(id).orElseThrow(() ->
                 new ProductNotFoundExceptions("Product not found with id: " + id));
@@ -46,5 +48,8 @@ public class ProductService {
     public List<Product> filterByName(String name) {
         return productRepo.findByName(name);
     }
+
+
+
 
 }

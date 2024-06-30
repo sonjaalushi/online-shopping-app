@@ -79,6 +79,13 @@
         <input type="text" id="name" th:field="*{name}" />
     </div>
     <div>
+        <label for="type">Type:</label>
+        <select id="type" name="type">
+            <option value="BOOKS">BOOKS</option>
+            <option value="ELEKTROSHTEPIAKE">ELEKTROSHTEPIAKE</option>
+        </select>
+    </div>
+    <div>
         <button type="submit">Save</button>
     </div>
 </form>

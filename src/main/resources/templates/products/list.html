@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Products</title>
+    <meta charset="UTF-8">
+    <title>Product List</title>
     <style>
+        /* CSS styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+            background-color: #f2f2f2;
+            margin: 20px;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
+        h2 {
+            color: #333333;
+        }
+
+        h3 {
+            color: #0066cc;
         }
 
         table {
-            width: 90%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
-        th, td {
-            padding: 12px;
+        table, th, td {
+            border: 1px solid #dddddd;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            padding: 8px;
         }
 
         th {
             background-color: #f2f2f2;
-            color: #333;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
+        li {
+            margin-bottom: 5px;
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 20px auto;
-            color: #fff;
-            background-color: #28a745;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        a.button:hover {
-            background-color: #218838;
+        .selected {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-<h1>Products</h1>
+<h2>Product List</h2>
+
+<!-- List all categories -->
+<h3>Categories:</h3>
+<ul>
+    <!-- Option for showing all products -->
+    <li>
+        <a th:href="@{/list}" th:classappend="${selectedCategory == null} ? 'selected' : ''">All Products</a>
+    </li>
+    <!-- List individual categories -->
+    <li th:each="category : ${categories}">
+        <a th:href="@{'/list?categoryId=' + ${category.id}}"
+           th:classappend="${selectedCategory == category.id} ? 'selected' : ''"
+           th:text="${category.name}"></a>
+    </li>
+</ul>
+
+<!-- List filtered products -->
+<h3>All Products:</h3>
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Category</th>
         <th>Author</th>
         <th>URL</th>
-        <th>Category</th>
-        <th>Actions</th>
+        <th>Action</th> <!-- New column for action -->
     </tr>
     </thead>
     <tbody>
     <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
         <td th:text="${product.name}"></td>
         <td th:text="${product.description}"></td>
+        <td th:text="${product.category.name}"></td>
         <td th:text="${product.author}"></td>
         <td th:text="${product.url}"></td>
-        <td th:text="${product.category.name}"></td>
         <td>
-<!--            <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>-->
-<!--            <a th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>-->
-            <a th:href="@{/orders/new/{productId}(productId=${product.id})}">Order</a
+            <a th:href="@{/orders/new/{productId}(productId=${product.id})}">Order</a>
         </td>
     </tr>
     </tbody>

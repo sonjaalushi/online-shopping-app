@@ -2,6 +2,7 @@ package com.sda.online_shopping_app.frontendController;
 
 import com.sda.online_shopping_app.entity.Category;
 import com.sda.online_shopping_app.entity.Product;
+import com.sda.online_shopping_app.repo.ProductRepo;
 import com.sda.online_shopping_app.service.CategoryService;
 import com.sda.online_shopping_app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class ProductController {
     private CategoryService categoryService;
 
 
+
     @GetMapping("/listAdmin")
     public String admin(Model model){
         List<Product>products=productService.findAll();
@@ -32,6 +34,10 @@ public class ProductController {
     @GetMapping("/list")
     public String listProducts(Model model) {
         List<Product> products = productService.findAll();
+
+        List<Category> categories = categoryService.getAlL();
+        model.addAttribute("categories", categories);
+
         model.addAttribute("products", products);
         return "products/list";
     }
@@ -44,10 +50,10 @@ public class ProductController {
         return "products/create";
     }
 
-    @PostMapping("/")
+    @PostMapping
     public String saveProduct(@ModelAttribute Product product) {
         productService.save(product);
-        return "redirect:/products/list";
+        return "redirect:/products/new";
     }
 
     @GetMapping("/edit/{id}")
@@ -63,6 +69,17 @@ public class ProductController {
         productService.save(product);
         return "redirect:/products/list";
     }
+
+
+    @GetMapping("/products")
+    public String showProductsByCategory(Model model) {
+        List<Category> categories = categoryService.getAlL(); // Assume you have a service to get all categories
+        model.addAttribute("categories", categories);
+        return "list";
+    }
+
+
+
 
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Integer id) {
